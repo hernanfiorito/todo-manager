@@ -1,0 +1,38 @@
+import com.springboot.crud.example.entity.Product;
+import com.springboot.crud.example.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class TodoService {
+    @Autowired
+    private TodoItemRepository repository;
+
+    public TodoItem createTodoItem(TodoItem item) {
+        return repository.save(item);
+    }
+
+    public List<TodoItem> getTodoItems() {
+        return repository.findAll();
+    }
+
+    public TodoItem getTodoItemById(int id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public TodoItem getTodoItemByName(String name) {
+        return repository.findByName(name);
+    }
+
+    public TodoItem deleteTodoItem(int id) {
+        return repository.deleteById(id);
+    }
+
+    public TodoItem editTodoItem(TodoItem item) {
+        TodoItem existingItem = repository.findById(item.getId()).orElse(null);
+        existingItem.setDescription(item.getDescription());
+        return repository.save(existingItem);
+    }
+}
