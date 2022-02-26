@@ -21,9 +21,14 @@ public class TodoController {
         return service.getTodoItemById(id);
     }
 
-    @GetMapping("/TodoItem/{name}")
+    @GetMapping("/TodoItemByName/{name}")
     public TodoItem findTodoItemByName(@PathVariable String name) {
         return service.getTodoItemByName(name);
+    }
+
+    @GetMapping("/TodoItems")
+    public List<TodoItem> findAllTodoItems() {
+        return service.getTodoItems();
     }
 
     @PutMapping("/edit")
